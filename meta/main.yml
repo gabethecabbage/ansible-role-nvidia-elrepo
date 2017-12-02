@@ -1,6 +1,6 @@
 ---
 dependencies:
-  - { role: elrepo }
+  - { role: pgporada.elrepo }
 galaxy_info:
   author: gabethecabbage
   description: RHEL/CentOS - Nvidia drivers from ELRepo

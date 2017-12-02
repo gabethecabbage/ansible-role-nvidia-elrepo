@@ -12,7 +12,7 @@ None
 
 ## Dependencies
 
-elrepo
+pgporada.elrepo
 
 ## Example Playbook
 
