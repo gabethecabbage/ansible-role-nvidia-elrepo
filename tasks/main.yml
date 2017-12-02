@@ -1,0 +1,35 @@
+---
+- name: nvidia-detect installed
+  yum:
+    name: nvidia-detect
+    state: present
+
+- name: Detect recomended nvidia driver
+  command: nvidia-detect
+  register: nvidia_drv_pkg
+  failed_when: "'No NVIDIA devices were found.' in nvidia_drv_pkg.stdout"
+  changed_when: false
+
+- name: nvidia drivers installed (if nvidia-detect found compatible card)
+  yum:
+    name: "{{ nvidia_drv_pkg.stdout }}"
+    state: present
+  when: "'kmod-nvidia' in nvidia_drv_pkg.stdout"
+
+- name: 32bit libs
+  set_fact:
+    drv_ver: "{{ nvidia_drv_pkg.stdout[12:] }}"      
+  when: "'kmod-nvidia-' in nvidia_drv_pkg.stdout"
+
+- name: nvidia 32bit libs (current series) installed
+  yum:
+    name: nvidia-x11-drv-32bit
+    state: present
+  when: nvidia_drv_pkg.stdout == "kmod-nvidia"
+
+- name: nvidia 32bit libs (other series) installed
+  yum:
+    name: nvidia-x11-drv-{{ drv_ver }}-32bit
+    state: present
+  when: "'kmod-nvidia-' in nvidia_drv_pkg.stdout"
+...
