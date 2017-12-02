@@ -1,6 +1,8 @@
 # ansible-role-nvidia-elrepo
 
-RHEL/CentOS - Nvidia driver from ELRepo
+Role uses elrepo to install binary nvidia drivers for Red Hat Enterprise Linux 6/7 derivatives.
+
+Driver version is selected based on the output of the nvidia-detect program and therefore the role requires no variables.
 
 ## Requirements
 
