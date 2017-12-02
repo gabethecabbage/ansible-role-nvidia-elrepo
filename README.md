@@ -12,7 +12,7 @@ None
 
 ## Dependencies
 
-pgporada.elrepo
+gabethecabbage.elrepo
 
 ## Example Playbook
 
